@@ -2,7 +2,7 @@
 //  ASAppDelegate.h
 //  ASDataGridView
 //
-//  Created by Alan on 7/28/13.
+//  Created by Alan Samet on 7/28/13.
 //  Copyright (c) 2013 Panalucent LLC. All rights reserved.
 //
 
