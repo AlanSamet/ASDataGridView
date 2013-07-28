@@ -18,6 +18,9 @@
 		E79625CA17A5C7E300BAA69E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E79625C917A5C7E300BAA69E /* Default@2x.png */; };
 		E79625CC17A5C7E300BAA69E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E79625CB17A5C7E300BAA69E /* Default-568h@2x.png */; };
 		E79625CF17A5C7E300BAA69E /* ASDataGridView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E79625CD17A5C7E300BAA69E /* ASDataGridView.xcdatamodeld */; };
+		E79625DA17A5C80E00BAA69E /* ASDataGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = E79625D617A5C80E00BAA69E /* ASDataGridView.m */; };
+		E79625DB17A5C80E00BAA69E /* ASDataGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79625D817A5C80E00BAA69E /* ASDataGridViewController.m */; };
+		E79625DC17A5C80E00BAA69E /* ASDataGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79625D917A5C80E00BAA69E /* ASDataGridViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,11 @@
 		E79625C917A5C7E300BAA69E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E79625CB17A5C7E300BAA69E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E79625CE17A5C7E300BAA69E /* ASDataGridView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ASDataGridView.xcdatamodel; sourceTree = "<group>"; };
+		E79625D517A5C80E00BAA69E /* ASDataGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDataGridView.h; sourceTree = "<group>"; };
+		E79625D617A5C80E00BAA69E /* ASDataGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDataGridView.m; sourceTree = "<group>"; };
+		E79625D717A5C80E00BAA69E /* ASDataGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDataGridViewController.h; sourceTree = "<group>"; };
+		E79625D817A5C80E00BAA69E /* ASDataGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDataGridViewController.m; sourceTree = "<group>"; };
+		E79625D917A5C80E00BAA69E /* ASDataGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDataGridViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,11 @@
 		E79625BB17A5C7E300BAA69E /* ASDataGridView */ = {
 			isa = PBXGroup;
 			children = (
+				E79625D517A5C80E00BAA69E /* ASDataGridView.h */,
+				E79625D617A5C80E00BAA69E /* ASDataGridView.m */,
+				E79625D717A5C80E00BAA69E /* ASDataGridViewController.h */,
+				E79625D817A5C80E00BAA69E /* ASDataGridViewController.m */,
+				E79625D917A5C80E00BAA69E /* ASDataGridViewController.xib */,
 				E79625C417A5C7E300BAA69E /* ASAppDelegate.h */,
 				E79625C517A5C7E300BAA69E /* ASAppDelegate.m */,
 				E79625CD17A5C7E300BAA69E /* ASDataGridView.xcdatamodeld */,
@@ -162,6 +175,7 @@
 				E79625C817A5C7E300BAA69E /* Default.png in Resources */,
 				E79625CA17A5C7E300BAA69E /* Default@2x.png in Resources */,
 				E79625CC17A5C7E300BAA69E /* Default-568h@2x.png in Resources */,
+				E79625DC17A5C80E00BAA69E /* ASDataGridViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +189,8 @@
 				E79625C217A5C7E300BAA69E /* main.m in Sources */,
 				E79625C617A5C7E300BAA69E /* ASAppDelegate.m in Sources */,
 				E79625CF17A5C7E300BAA69E /* ASDataGridView.xcdatamodeld in Sources */,
+				E79625DA17A5C80E00BAA69E /* ASDataGridView.m in Sources */,
+				E79625DB17A5C80E00BAA69E /* ASDataGridViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

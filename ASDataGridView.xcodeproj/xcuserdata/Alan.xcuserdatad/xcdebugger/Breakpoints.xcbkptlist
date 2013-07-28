@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ASDataGridView/ASAppDelegate.m"
+         timestampString = "396742571.218737"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-prepareUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ASDataGridView/ASAppDelegate.m"
+         timestampString = "396742572.846072"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "-prepareUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ASDataGridView/ASAppDelegate.m"
+         timestampString = "396743936.801819"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "-verifyDataStoreHasData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ASDataGridView/ASAppDelegate.m"
+         timestampString = "396743943.359744"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
+         landmarkName = "-verifyDataStoreHasData"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
+</Bucket>

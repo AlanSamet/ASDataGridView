@@ -7,6 +7,9 @@
 //
 
 #import "ASAppDelegate.h"
+#import "ASDataGridView.h"
+#import "ASDataGridViewController.h"
+#import <stdlib.h>
 
 @implementation ASAppDelegate
 
@@ -14,11 +17,161 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+- (void)prepareUI
+{
+    self.tabBarController = [[UITabBarController alloc]init];
+    
+    ASDataGridViewController *sample1 = [[ASDataGridViewController alloc]initWithNibName:nil bundle:nil];
+    sample1.title = @"Simple";
+    
+    ASDataGridView *view1 = (ASDataGridView *)sample1.view;
+    ASSimpleDataGridViewDataSource *simpleSource1 = [[ASSimpleDataGridViewDataSource alloc]init];
+    [simpleSource1 setSourceData:[self buildSampleGridData:20 withRowCount:200]];
+    [view1 setSourceData:simpleSource1];
+    
+    
+    ASDataGridViewController *sample2 = [[ASDataGridViewController alloc]initWithNibName:nil bundle:nil];
+    sample2.title = @"CustomRender";
+    
+    ASDataGridView *view2 = (ASDataGridView *)sample2.view;
+    
+    ASSimpleDataGridViewDataSource *simpleSource2 = [[ASSimpleDataGridViewDataSource alloc]init];
+    [simpleSource2 setSourceData:[self buildSampleGridData:20 withRowCount:200]];
+    [view2 setSourceData:simpleSource2];
+    
+    view2.rowSelectionChanged = ^(ASDataGridView *sender, int rowNumber, NSArray *rowData, BOOL isSelected)
+    {
+        //Let's make this single selection.
+        if (isSelected)
+        {
+            NSArray *selectedRowNumbers = [sender.selectedRowNumbers copy];
+            [selectedRowNumbers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+               if (![obj isEqual:[NSNumber numberWithInt:rowNumber]])
+               {
+                   [sender deselectRowNumber:[obj intValue]];
+               }
+            }];
+        }
+        NSLog(@"%d:%d:%@", rowNumber, isSelected, rowData);
+    };
+    
+    [view2.columnDefinitions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        ASDataGridColumnDefinition *colDef = (ASDataGridColumnDefinition *)obj;
+        
+        colDef.cellRenderer = ^(ASDataGridRowCell * cell, id cellValue, ASDataGridColumnDefinition *columnDefinition, int rowNumber, NSArray *rowData, BOOL rowIsSelected)
+        {
+            cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(1000)/1000.0f green:arc4random_uniform(1000)/1000.0f blue:arc4random_uniform(1000)/1000.0f alpha:1.0f];
+            cell.textLabel.text = [cellValue description];
+
+            if (rowIsSelected)
+            {
+                cell.layer.borderColor = [UIColor blueColor].CGColor;
+                cell.layer.borderWidth = 2.0f;
+                cell.textLabel.textColor = [UIColor whiteColor];
+            }
+            else
+            {
+                cell.layer.borderColor = [UIColor darkGrayColor].CGColor;
+                cell.layer.borderWidth = 0.5f;
+                cell.textLabel.textColor = [UIColor blackColor];
+            }
+            if (rowNumber == -1)
+                cell.textLabel.text = [obj name];
+        };
+    }];
+    
+    ASDataGridViewController *sample3 = [[ASDataGridViewController alloc]initWithNibName:nil bundle:nil];
+    sample3.title = @"CoreData";
+    
+    ASDataGridView *view3 = (ASDataGridView *)sample3.view;
+    
+    ASFetchedResultsDataGridViewDataSource *dataSource3 = [[ASFetchedResultsDataGridViewDataSource alloc]init];
+    [dataSource3 setFetchedResultsController:[self createFetchedResultsController]];
+
+    [view3 setSourceData:dataSource3];
+    
+    self.tabBarController.viewControllers = @[sample1, sample2, sample3];
+    
+    self.window.rootViewController = self.tabBarController;
+}
+
+- (NSFetchedResultsController *) createFetchedResultsController
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SampleEntity" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"attribute1" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    
+    NSError *error = nil;
+    [aFetchedResultsController performFetch:&error];
+    NSLog(@"%@", error);
+    return aFetchedResultsController;
+}
+
+- (NSDictionary *)buildSampleGridData:(int)colCount withRowCount:(int)rowCount
+{
+    NSMutableArray *cols = [[NSMutableArray alloc]initWithCapacity:colCount];
+    NSMutableArray *rows = [[NSMutableArray alloc]initWithCapacity:rowCount];
+    
+    for (int i = 0; i < colCount; i++)
+    {
+        [cols setObject:[NSString stringWithFormat:@"Column %d", i] atIndexedSubscript:i];
+    }
+    
+    for (int r = 0; r < rowCount; r++)
+    {
+        NSMutableArray *rowData = [[NSMutableArray alloc]initWithCapacity:colCount];
+        for (int c = 0; c < colCount; c++)
+        {
+            [rowData setObject:[NSString stringWithFormat:@"r%dc%d", r, c] atIndexedSubscript:c];
+        }
+        [rows setObject:rowData atIndexedSubscript:r];
+    }
+    
+    return @{@"columns":cols, @"data":rows};
+}
+
+- (void)verifyDataStoreHasData
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SampleEntity" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    if ([self.managedObjectContext countForFetchRequest:fetchRequest error:&error] == 0)
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            NSManagedObject *obj = [NSEntityDescription insertNewObjectForEntityForName:@"SampleEntity" inManagedObjectContext:self.managedObjectContext];
+            [obj setValue:[NSNumber numberWithInt:i] forKey:@"attribute1"];
+            [obj setValue:[NSString stringWithFormat:@"Value %d", i] forKey:@"attribute2"];
+        }
+        [self.managedObjectContext save:&error];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    [self prepareUI];
+    [self verifyDataStoreHasData];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
